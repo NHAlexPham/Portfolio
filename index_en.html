@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhat-Huy Alex Pham | Software Engineering Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        },
+                        dark: {
+                            bg: '#0b0f19',
+                            card: '#111827',
+                            border: '#1f2937',
+                            hover: '#1e293b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+        }
+        .glass-card {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-nav {
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #818cf8 0%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-border {
+            position: relative;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(56, 189, 248, 0.1));
+            padding: 1px;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374151;
+        }
+    </style>
+</head>
+<body class="bg-dark-bg text-gray-100 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="font-mono font-bold text-lg tracking-tight hover:opacity-80 transition-opacity flex items-center gap-2">
+                <span class="text-brand-500">&lt;</span>
+                <span class="text-white">AlexPham</span>
+                <span class="text-brand-500">/&gt;</span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#about" class="hover:text-brand-500 transition-colors">About</a>
+                <a href="#skills" class="hover:text-brand-500 transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-brand-500 transition-colors">Projects</a>
+                <a href="#timeline" class="hover:text-brand-500 transition-colors">Education</a>
+                <a href="#contact" class="hover:text-brand-500 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Action Button -->
+            <div class="hidden md:flex items-center gap-3">
+                <!-- Language switch: points to the French page (index.html) -->
+                <a href="index.html" class="px-3 py-2 rounded-xl text-xs font-semibold bg-dark-card border border-dark-border text-gray-300 hover:text-white hover:bg-dark-hover transition-all" title="Version française">
+                    FR
+                </a>
+                <a href="#contact" class="px-4 py-2 rounded-xl text-xs font-semibold bg-brand-600 hover:bg-brand-500 text-white transition-all shadow-lg shadow-brand-500/20">
+                    Hire Me
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-gray-400 hover:text-white focus:outline-none" aria-label="Open menu">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-dark-card border-b border-dark-border px-4 pt-2 pb-6 space-y-3">
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-brand-500">About</a>
+            <a href="#skills" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-brand-500">Skills</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-brand-500">Projects</a>
+            <a href="#timeline" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-brand-500">Education</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-brand-500">Contact</a>
+            <a href="index.html" class="block py-2 text-gray-300 hover:text-brand-500">Version française</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="inline-block mt-2 w-full text-center py-2.5 rounded-xl text-xs font-semibold bg-brand-600 text-white">
+                Hire Me
+            </a>
+        </div>
+    </header>
+
+    <main class="pt-24 space-y-24">
+
+        <!-- Hero Section -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-16 pb-12">
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-mono">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Looking for a paid internship (Summer / Fall 2026)
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+                        Hi, I'm <br>
+                        <span class="gradient-text">Nhat-Huy Alex Pham</span>
+                    </h1>
+
+                    <p class="text-lg text-gray-400 leading-relaxed max-w-2xl">
+                        <strong class="text-gray-200">Software engineering student at ÉTS Montréal</strong>. Passionate about building full-stack applications, robust REST APIs and intuitive Android mobile interfaces.
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-4 pt-2">
+                        <a href="#projects" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-medium text-sm transition-all shadow-lg shadow-brand-500/25 flex items-center gap-2">
+                            <span>Explore my projects</span>
+                            <i class="fa-solid fa-arrow-down text-xs"></i>
+                        </a>
+                        
+                        <button onclick="copyEmail()" class="px-5 py-3 rounded-xl bg-dark-card border border-dark-border hover:bg-dark-hover text-gray-300 font-medium text-sm transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-brand-400"></i>
+                            <span id="copy-email-text">n.h.alex.p@gmail.com</span>
+                            <i class="fa-solid fa-copy text-xs text-gray-500"></i>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-6 pt-4 text-gray-400 text-sm font-mono">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot text-brand-500"></i>
+                            <span>Laval, QC, Canada</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-language text-brand-500"></i>
+                            <span>Bilingual (FR / EN)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side Interactive Terminal Mockup -->
+                <div class="md:col-span-5">
+                    <div class="bg-dark-card border border-dark-border rounded-2xl overflow-hidden shadow-2xl">
+                        <div class="bg-gray-900/80 px-4 py-3 border-b border-dark-border flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                            </div>
+                            <span class="text-xs font-mono text-gray-500">alex-profile.json</span>
+                        </div>
+                        <div class="p-5 font-mono text-xs sm:text-sm text-gray-300 leading-relaxed overflow-x-auto">
+                            <p><span class="text-purple-400">const</span> <span class="text-yellow-300">student</span> = {</p>
+                            <p class="pl-4"><span class="text-blue-400">name</span>: <span class="text-emerald-300">"Nhat-Huy Alex Pham"</span>,</p>
+                            <p class="pl-4"><span class="text-blue-400">university</span>: <span class="text-emerald-300">"ÉTS Montréal"</span>,</p>
+                            <p class="pl-4"><span class="text-blue-400">degree</span>: <span class="text-emerald-300">"B.Eng. Software Engineering"</span>,</p>
+                            <p class="pl-4"><span class="text-blue-400">creditsCompleted</span>: <span class="text-amber-400">59</span>,</p>
+                            <p class="pl-4"><span class="text-blue-400">gpa</span>: <span class="text-amber-400">3.21</span>,</p>
+                            <p class="pl-4"><span class="text-blue-400">club</span>: <span class="text-emerald-300">"Conjure (Video Games)"</span>,</p>
+                            <p class="pl-4"><span class="text-blue-400">skills</span>: [</p>
+                            <p class="pl-8 text-emerald-300">"Java", "TypeScript", "SQL", "Android", "AWS RDS"</p>
+                            <p class="pl-4">],</p>
+                            <p class="pl-4"><span class="text-blue-400">seekingInternship</span>: <span class="text-purple-400">true</span></p>
+                            <p>};</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="space-y-4 text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-mono font-bold tracking-widest text-brand-500 uppercase">About Me</h2>
+                <h3 class="text-3xl font-extrabold text-white sm:text-4xl">Rigorous, passionate &amp; solution-driven</h3>
+                <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+                    Software engineering student at ÉTS with hands-on experience from large-scale projects and from the video game club <strong>Conjure</strong>. I'm comfortable with database architecture, native Android development and building robust REST APIs.
+                </p>
+            </div>
+
+            <!-- Key Highlights Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-card p-6 rounded-2xl border border-dark-border hover:border-brand-500/40 transition-colors">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h4 class="text-white font-semibold mb-1">ÉTS Montréal</h4>
+                    <p class="text-xs text-gray-400 mb-2">Bachelor's in Software Engineering</p>
+                    <span class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded">59 credits | GPA: 3.21</span>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-dark-border hover:border-brand-500/40 transition-colors">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <h4 class="text-white font-semibold mb-1">Mobile &amp; Backend</h4>
+                    <p class="text-xs text-gray-400">Android Studio (Java/Kotlin), RESTful APIs and SQL relational databases.</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-dark-border hover:border-brand-500/40 transition-colors">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-cloud"></i>
+                    </div>
+                    <h4 class="text-white font-semibold mb-1">Cloud &amp; Infrastructure</h4>
+                    <p class="text-xs text-gray-400">AWS RDS deployment, secure Cloudflare tunnels and REST backend architectures.</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-dark-border hover:border-brand-500/40 transition-colors">
+                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-xl mb-4">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <h4 class="text-white font-semibold mb-1">Conjure Club</h4>
+                    <p class="text-xs text-gray-400">Active member of the video game development club at ÉTS, used to agile teamwork.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Skills Section -->
+        <section id="skills" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="space-y-4 text-center max-w-2xl mx-auto mb-10">
+                <h2 class="text-xs font-mono font-bold tracking-widest text-brand-500 uppercase">Technical Skills</h2>
+                <h3 class="text-3xl font-extrabold text-white">My tools &amp; technologies</h3>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-8" id="skills-filter">
+                <button onclick="filterSkills('all')" class="skill-tab active px-4 py-2 rounded-xl text-xs font-medium bg-brand-600 text-white transition-all" data-category="all">All</button>
+                <button onclick="filterSkills('lang')" class="skill-tab px-4 py-2 rounded-xl text-xs font-medium bg-dark-card border border-dark-border text-gray-400 hover:text-white transition-all" data-category="lang">Languages</button>
+                <button onclick="filterSkills('mobile')" class="skill-tab px-4 py-2 rounded-xl text-xs font-medium bg-dark-card border border-dark-border text-gray-400 hover:text-white transition-all" data-category="mobile">Mobile &amp; Web</button>
+                <button onclick="filterSkills('backend')" class="skill-tab px-4 py-2 rounded-xl text-xs font-medium bg-dark-card border border-dark-border text-gray-400 hover:text-white transition-all" data-category="backend">Backend &amp; DB</button>
+                <button onclick="filterSkills('tools')" class="skill-tab px-4 py-2 rounded-xl text-xs font-medium bg-dark-card border border-dark-border text-gray-400 hover:text-white transition-all" data-category="tools">Tools &amp; Design</button>
+            </div>
+
+            <!-- Skill Cards Container -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4" id="skills-grid">
+                <!-- Languages -->
+                <div class="skill-item glass-card p-4 rounded-xl border border-dark-border flex items-center gap-3" data-cat="lang">
+                    <i class="fa-brands fa-java text-amber-500 text-2xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold text-white">Java</h5>
+                        <p class="text-xs text-gray-400">OOP, REST API</p>
+                    </div>
+                </div>
+
+                <div class="skill-item glass-card p-4 rounded-xl border border-dark-border flex items-center gap-3" data-cat="lang">
+                    <i class="fa-brands fa-js text-yellow-400 text-2xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold text-white">TypeScript</h5>
+                        <p class="text-xs text-gray-400">Web &amp; Scripts</p>
+                    </div>
+                </div>
+
+                <div class="skill-item glass-card p-4 rounded-xl border border-dark-border flex items-center gap-3" data-cat="lang">
+                    <i class="fa-solid fa-database text-blue-400 text-2xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold text-white">SQL</h5>
+                        <p class="text-xs text-gray-400">Schemas, Queries</p>
+                    </div>
+                </div>
+
+                <div class="skill-item glass-card p-4 rounded-xl border border-dark-border flex items-center gap-3" data-cat="lang">
+                    <i class="fa-brands fa-html5 text-orange-500 text-2xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold text-white">HTML / CSS</h5>
+                        <p class="text-xs text-gray-400">Responsive UI</p>
+                    </div>
+                </div>
+
+                <!-- Mobile -->
+                <div class="skill-item glass-card p-4 rounded-xl border border-dark-border flex items-center gap-3" data-cat="mobile">
+                    <i class="fa-brands fa-android text-emerald-400 text-2xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold text-white">Android Studio</h5>
+                        <p class="text-xs text-gray-400">Java &amp; XML</p>
+                    </div>
+                </div>
+
+                <div class="skill-item glass-card p-4 rounded-xl border border-dark-border flex items-center gap-3" data-cat="mobile">
+                    <i class="fa-solid fa-cubes text-purple-400 text-2xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold text-white">Material Design</h5>
+                        <p class="text-xs text-gray-400">UI/UX Guidelines</p>
+                    </div>
+                </div>
+
+                <div class="skill-item glass-card p-4 rounded-xl border border-dark-border flex items-center gap-3" data-cat="mobile">
+                    <i class="fa-solid fa-desktop text-sky-400 text-2xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold text-white">JavaFX</h5>
+                        <p class="text-xs text-gray-400">Desktop Apps</p>
+                    </div>
+                </div>
+
+                <!-- Backend -->
+                <div class="skill-item glass-card p-4 rounded-xl border border-dark-border flex items-center gap-3" data-cat="backend">
+                    <i class="fa-solid fa-network-wired text-indigo-400 text-2xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold text-white">RESTful APIs</h5>
+                        <p class="text-xs text-gray-400">API Architecture</p>
+                    </div>
+                </div>
+
+                <div class="skill-item glass-card p-4 rounded-xl border border-dark-border flex items-center gap-3" data-cat="backend">
+                    <i class="fa-brands fa-aws text-amber-400 text-2xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold text-white">AWS RDS</h5>
+                        <p class="text-xs text-gray-400">Cloud Relational DB</p>
+                    </div>
+                </div>
+
+                <div class="skill-item glass-card p-4 rounded-xl border border-dark-border flex items-center gap-3" data-cat="backend">
+                    <i class="fa-solid fa-flask text-teal-400 text-2xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold text-white">Python / Flask</h5>
+                        <p class="text-xs text-gray-400">Lightweight Backend</p>
+                    </div>
+                </div>
+
+                <!-- Tools -->
+                <div class="skill-item glass-card p-4 rounded-xl border border-dark-border flex items-center gap-3" data-cat="tools">
+                    <i class="fa-brands fa-git-alt text-red-500 text-2xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold text-white">Git &amp; GitHub</h5>
+                        <p class="text-xs text-gray-400">Version Control</p>
+                    </div>
+                </div>
+
+                <div class="skill-item glass-card p-4 rounded-xl border border-dark-border flex items-center gap-3" data-cat="tools">
+                    <i class="fa-brands fa-figma text-pink-400 text-2xl"></i>
+                    <div>
+                        <h5 class="text-sm font-semibold text-white">Figma</h5>
+                        <p class="text-xs text-gray-400">Mockups &amp; Prototyping</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects Section -->
+        <section id="projects" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="space-y-4 text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-xs font-mono font-bold tracking-widest text-brand-500 uppercase">Work</h2>
+                <h3 class="text-3xl font-extrabold text-white sm:text-4xl">Academic &amp; personal projects</h3>
+                <p class="text-gray-400 text-sm">A selection of projects where I applied my skills in databases, Android and software architecture.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+
+                <!-- Project 1: YouTube Downloader -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-dark-border hover:border-brand-500/50 transition-all group flex flex-col justify-between">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 text-xs font-mono font-medium">Android &amp; Flask Backend</span>
+                            <span class="text-xs font-mono text-gray-500">2026</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white group-hover:text-brand-400 transition-colors">
+                            YouTube Audio/Video Downloader
+                        </h4>
+                        <p class="text-xs text-gray-400 font-mono">Role: Lead developer</p>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            Android app (Kotlin/XML) paired with a Flask backend that is publicly reachable through a Cloudflare Tunnel. High-quality extraction (MP3 320 kbps, MP4 1080p) with on-the-fly conversion using YT-DLP.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">Kotlin</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">Flask</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">YT-DLP</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">Cloudflare</span>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 bg-gray-900/40 border-t border-dark-border flex items-center justify-between">
+                        <button onclick="openModal('YouTube Downloader', 'Kotlin mobile app with live YouTube thumbnail previews, a custom pastel progress bar, and heavy request handling through a Python Flask server.')" class="text-xs text-brand-400 font-medium hover:underline flex items-center gap-1">
+                            Project details <i class="fa-solid fa-chevron-right text-xxs"></i>
+                        </button>
+                        <span class="text-xs text-gray-500 font-mono"><i class="fa-solid fa-mobile-button mr-1"></i>Android</span>
+                    </div>
+                </div>
+
+                <!-- Project 2: Simulaction Stock Simulator -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-dark-border hover:border-brand-500/50 transition-all group flex flex-col justify-between">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-mono font-medium">Backend &amp; AWS Cloud</span>
+                            <span class="text-xs font-mono text-gray-500">2023</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white group-hover:text-brand-400 transition-colors">
+                            Stock Market Simulator (Simulaction)
+                        </h4>
+                        <p class="text-xs text-gray-400 font-mono">Role: Database developer</p>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            Design and deployment of a RESTful API in Java connected to an AWS RDS relational database to simulate real-time stock trading flows.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">Java</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">SQL</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">AWS RDS</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">REST API</span>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 bg-gray-900/40 border-t border-dark-border flex items-center justify-between">
+                        <button onclick="openModal('Stock Market Simulator', 'Designed normalized database schemas to handle high transaction volumes, price histories and secure cloud persistence.')" class="text-xs text-brand-400 font-medium hover:underline flex items-center gap-1">
+                            Project details <i class="fa-solid fa-chevron-right text-xxs"></i>
+                        </button>
+                        <span class="text-xs text-gray-500 font-mono"><i class="fa-solid fa-server mr-1"></i>Backend API</span>
+                    </div>
+                </div>
+
+                <!-- Project 3: Mobile Reservation App -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-dark-border hover:border-brand-500/50 transition-all group flex flex-col justify-between">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-mono font-medium">Android &amp; Material Design</span>
+                            <span class="text-xs font-mono text-gray-500">2023</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white group-hover:text-brand-400 transition-colors">
+                            Mobile Booking App
+                        </h4>
+                        <p class="text-xs text-gray-400 font-mono">Role: Database &amp; UI developer</p>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            Full mobile interface built in Android Studio (Java/XML) following Material Design principles, with an authentication system and booking management.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">Android Studio</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">Java</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">XML</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">Material UI</span>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 bg-gray-900/40 border-t border-dark-border flex items-center justify-between">
+                        <button onclick="openModal('Booking App', 'Direct connection between the user interface and the backend database for dynamic availability checks and authentication.')" class="text-xs text-brand-400 font-medium hover:underline flex items-center gap-1">
+                            Project details <i class="fa-solid fa-chevron-right text-xxs"></i>
+                        </button>
+                        <span class="text-xs text-gray-500 font-mono"><i class="fa-solid fa-mobile mr-1"></i>Mobile App</span>
+                    </div>
+                </div>
+
+                <!-- Project 4: Learning Management System (LMS) -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-dark-border hover:border-brand-500/50 transition-all group flex flex-col justify-between">
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-xs font-mono font-medium">Quality Assurance &amp; Testing</span>
+                            <span class="text-xs font-mono text-gray-500">2022</span>
+                        </div>
+                        <h4 class="text-xl font-bold text-white group-hover:text-brand-400 transition-colors">
+                            Learning Management System
+                        </h4>
+                        <p class="text-xs text-gray-400 font-mono">Role: Code tester &amp; documentation</p>
+                        <p class="text-sm text-gray-300 leading-relaxed">
+                            Built automated test suites to validate the core features of a Moodle-style platform. Wrote the full technical documentation in Markdown.
+                        </p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">Automated Testing</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">Markdown</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-dark-bg text-gray-300 text-xs font-mono">Git / GitHub</span>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 bg-gray-900/40 border-t border-dark-border flex items-center justify-between">
+                        <button onclick="openModal('LMS Project', 'Thorough validation of the application\'s edge cases and version-controlled test repositories to support team collaboration.')" class="text-xs text-brand-400 font-medium hover:underline flex items-center gap-1">
+                            Project details <i class="fa-solid fa-chevron-right text-xxs"></i>
+                        </button>
+                        <span class="text-xs text-gray-500 font-mono"><i class="fa-solid fa-vial mr-1"></i>QA &amp; Docs</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Education & Timeline Section -->
+        <section id="timeline" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="space-y-4 text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-xs font-mono font-bold tracking-widest text-brand-500 uppercase">Background &amp; Education</h2>
+                <h3 class="text-3xl font-extrabold text-white">My academic path</h3>
+            </div>
+
+            <div class="max-w-3xl mx-auto relative border-l-2 border-dark-border pl-6 sm:pl-8 space-y-10">
+
+                <!-- ÉTS -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-brand-500 ring-4 ring-dark-bg group-hover:scale-125 transition-transform"></div>
+                    <div class="glass-card p-6 rounded-2xl border border-dark-border">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                            <h4 class="text-lg font-bold text-white">Bachelor's in Software Engineering</h4>
+                            <span class="text-xs font-mono text-brand-400 bg-brand-500/10 px-3 py-1 rounded-full">2024 - Present</span>
+                        </div>
+                        <p class="text-sm font-medium text-gray-300 mb-3">École de Technologie Supérieure (ÉTS), Montréal, QC</p>
+                        <ul class="space-y-1.5 text-xs text-gray-400 list-disc list-inside">
+                            <li><strong class="text-gray-200">59 credits completed</strong> | GPA: <strong class="text-emerald-400">3.21 / 4.30</strong></li>
+                            <li>Active member of the video game development club <strong class="text-gray-200">Conjure</strong></li>
+                            <li>Focus on software engineering, data architecture and mobile systems</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Bois-de-Boulogne -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-gray-600 ring-4 ring-dark-bg group-hover:scale-125 transition-transform"></div>
+                    <div class="glass-card p-6 rounded-2xl border border-dark-border">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                            <h4 class="text-lg font-bold text-white">DEC (CEGEP) - Mathematics and Computer Science</h4>
+                            <span class="text-xs font-mono text-gray-400 bg-gray-800 px-3 py-1 rounded-full">2021 - 2024</span>
+                        </div>
+                        <p class="text-sm font-medium text-gray-300 mb-2">Collège Bois-de-Boulogne, Montréal, QC</p>
+                        <p class="text-xs text-gray-400">Solid foundation in algorithms, differential and integral calculus, data structures and object-oriented programming.</p>
+                    </div>
+                </div>
+
+                <!-- Regina Assumpta -->
+                <div class="relative group">
+                    <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-gray-700 ring-4 ring-dark-bg"></div>
+                    <div class="glass-card p-6 rounded-2xl border border-dark-border">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                            <h4 class="text-base font-bold text-white">High School Diploma (DES) - Natural Sciences</h4>
+                            <span class="text-xs font-mono text-gray-500">2016 - 2021</span>
+                        </div>
+                        <p class="text-xs text-gray-400">Collège Regina Assumpta, Montréal, QC</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section id="contact" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 border border-dark-border relative overflow-hidden">
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="grid md:grid-cols-5 gap-10 items-start">
+                    
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h2 class="text-xs font-mono font-bold tracking-widest text-brand-500 uppercase mb-2">Contact</h2>
+                            <h3 class="text-3xl font-extrabold text-white">Let's talk about a project or an internship</h3>
+                        </div>
+
+                        <p class="text-sm text-gray-400 leading-relaxed">
+                            Currently open to software engineering internship opportunities. Feel free to send me a message through the form or email me directly.
+                        </p>
+
+                        <div class="space-y-4 pt-2">
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xxs text-gray-500 font-mono">EMAIL</p>
+                                    <a href="mailto:n.h.alex.p@gmail.com" class="text-sm font-medium text-gray-200 hover:text-brand-400 transition-colors">n.h.alex.p@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xxs text-gray-500 font-mono">PHONE</p>
+                                    <p class="text-sm font-medium text-gray-200">438-519-1428</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <div class="w-10 h-10 rounded-xl bg-brand-500/10 text-brand-400 flex items-center justify-center">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xxs text-gray-500 font-mono">LOCATION</p>
+                                    <p class="text-sm font-medium text-gray-200">Laval, QC, Canada</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form connected directly to Formspree -->
+                    <div class="md:col-span-3 bg-dark-card border border-dark-border rounded-2xl p-6 sm:p-8">
+                        <form id="contact-form" action="https://formspree.io/f/xqppogql" method="POST" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-xs font-mono text-gray-300 mb-1">YOUR NAME</label>
+                                <input type="text" id="name" name="name" required placeholder="John Smith" 
+                                       class="w-full px-4 py-3 rounded-xl bg-dark-bg border border-dark-border text-white text-sm focus:outline-none focus:border-brand-500 transition-colors">
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-xs font-mono text-gray-300 mb-1">YOUR EMAIL</label>
+                                <input type="email" id="email" name="email" required placeholder="john@company.com" 
+                                       class="w-full px-4 py-3 rounded-xl bg-dark-bg border border-dark-border text-white text-sm focus:outline-none focus:border-brand-500 transition-colors">
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-xs font-mono text-gray-300 mb-1">MESSAGE</label>
+                                <textarea id="message" name="message" rows="4" required placeholder="Hi Alex, we'd love to set up an interview with you..." 
+                                          class="w-full px-4 py-3 rounded-xl bg-dark-bg border border-dark-border text-white text-sm focus:outline-none focus:border-brand-500 transition-colors resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" id="submit-btn" class="w-full py-3.5 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-medium text-sm transition-all shadow-lg shadow-brand-500/20 flex items-center justify-center gap-2">
+                                <span>Send message</span> <i class="fa-solid fa-paper-plane text-xs"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-dark-border bg-dark-bg py-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-xs text-gray-500 font-mono">
+                © 2026 Nhat-Huy Alex Pham. All rights reserved.
+            </p>
+            <div class="flex items-center gap-6 text-gray-400 text-xs">
+                <span>ÉTS Montréal</span>
+                <span>•</span>
+                <span>Software Engineering</span>
+                <span>•</span>
+                <a href="mailto:n.h.alex.p@gmail.com" class="hover:text-brand-400">n.h.alex.p@gmail.com</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Dialog / Modal -->
+    <div id="modal-backdrop" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="glass-card bg-dark-card border border-dark-border rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-dark-border pb-3">
+                <h4 id="modal-title" class="text-lg font-bold text-white">Notification</h4>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-white text-sm" aria-label="Close">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <p id="modal-body" class="text-sm text-gray-300 leading-relaxed"></p>
+            <div class="pt-2 flex justify-end">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Toggle Mobile Navigation
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Copy Email helper
+        function copyEmail() {
+            const email = "n.h.alex.p@gmail.com";
+            navigator.clipboard.writeText(email).then(() => {
+                const btnText = document.getElementById('copy-email-text');
+                const originalText = btnText.innerText;
+                btnText.innerText = "Copied!";
+                setTimeout(() => {
+                    btnText.innerText = originalText;
+                }, 2000);
+            }).catch(() => {
+                openModal("Email", "You can reach me at: n.h.alex.p@gmail.com");
+            });
+        }
+
+        // Filter Skills by category
+        function filterSkills(category) {
+            const tabs = document.querySelectorAll('#skills-filter button');
+            tabs.forEach(tab => {
+                if(tab.getAttribute('data-category') === category) {
+                    tab.className = "skill-tab active px-4 py-2 rounded-xl text-xs font-medium bg-brand-600 text-white transition-all";
+                } else {
+                    tab.className = "skill-tab px-4 py-2 rounded-xl text-xs font-medium bg-dark-card border border-dark-border text-gray-400 hover:text-white transition-all";
+                }
+            });
+
+            const items = document.querySelectorAll('.skill-item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-cat') === category) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Custom Modal handlers
+        function openModal(title, bodyText) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-body').innerText = bodyText;
+            const modal = document.getElementById('modal-backdrop');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal-backdrop');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Formspree Async AJAX Handler
+        async function handleContactSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitBtn = document.getElementById('submit-btn');
+            const originalBtnText = submitBtn.innerHTML;
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Sending...`;
+
+            try {
+                const data = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: data,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const name = document.getElementById('name').value;
+                    openModal("Message sent!", `Thanks ${name}! Your message was sent to n.h.alex.p@gmail.com via Formspree. Alex will get back to you shortly.`);
+                    form.reset();
+                } else {
+                    const responseData = await response.json();
+                    if (Object.hasOwn(responseData, 'errors')) {
+                        openModal("Error", responseData["errors"].map(error => error["message"]).join(", "));
+                    } else {
+                        openModal("Error", "Something went wrong while sending your message. You can also email me directly at n.h.alex.p@gmail.com.");
+                    }
+                }
+            } catch (error) {
+                openModal("Network error", "Unable to reach the server. Please try again or email me directly.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        }
+    </script>
+</body>
+</html>
